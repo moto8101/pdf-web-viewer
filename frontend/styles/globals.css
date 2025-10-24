@@ -1,0 +1,62 @@
+/* (省略) 既存の:root変数とbody, htmlのスタイルはそのまま */
+
+.html-content-wrapper {
+  max-width: var(--main-max-width);
+  margin: 20px auto;
+  padding: 20px;
+  
+  /* テキストの整列を標準に戻す */
+  text-align: justify; /* 両端揃え、読みやすさを向上 */
+  word-wrap: break-word; /* 長い単語でも強制的に改行 */
+  white-space: pre-wrap; /* pdftohtmlの改行やスペースを一部保持しつつ折り返す */
+
+  font-size: var(--main-font-size);
+  line-height: var(--main-line-height);
+}
+
+/* pdftohtmlが生成する <p> や <h1> にスタイルを適用 */
+.html-content-wrapper p {
+  margin-top: 1em; /* 段落の上部に余白 */
+  margin-bottom: 1em; /* 段落の下部に余白 */
+  text-indent: 1.5em; /* 段落の最初の行にインデント */
+}
+
+/* 見出しのスタイル */
+.html-content-wrapper h1,
+.html-content-wrapper h2,
+.html-content-wrapper h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  line-height: 1.3;
+  text-align: left; /* 見出しは左揃えが自然 */
+  text-indent: 0; /* 見出しにはインデント不要 */
+}
+
+/* pdftohtmlが出力する可能性のある特定のクラスに対するリセット */
+/* 例: pdftohtmlはposition:absoluteを多用することがあるのでリセット */
+.html-content-wrapper div,
+.html-content-wrapper span,
+.html-content-wrapper p {
+  position: static !important; /* 絶対配置を無効化し、フローレイアウトに強制 */
+  left: auto !important;
+  top: auto !important;
+  width: auto !important;
+  height: auto !important;
+  float: none !important;
+  display: block; /* 段落やdivをブロック要素として扱う */
+  margin: 0; /* 元のpdftohtmlのmarginをリセット */
+  padding: 0; /* 元のpdftohtmlのpaddingをリセット */
+}
+
+/* フォントサイズを見出しに応じて調整 */
+.html-content-wrapper h1 { font-size: calc(var(--main-font-size) * 1.8); }
+.html-content-wrapper h2 { font-size: calc(var(--main-font-size) * 1.5); }
+.html-content-wrapper h3 { font-size: calc(var(--main-font-size) * 1.3); }
+
+/* 必要に応じて、pdftohtmlが生成する特定のクラスを非表示にする */
+.html-content-wrapper .footnote { display: none; } /* 例: 注釈を非表示に */
+
+/* pdftohtmlが生成する <br> は基本的に不要になるので非表示 */
+.html-content-wrapper br {
+  display: none;
+}
