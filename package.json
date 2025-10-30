@@ -1,0 +1,21 @@
+{
+  "name": "pdf-web-viewer",
+  "version": "1.0.0",
+  "scripts": {
+    "comment:backend": "↓ macOS/Linux用のバックエンド起動コマンド ↓",
+    "dev:backend:unix": "cd backend && source .venv/bin/activate && uvicorn app.main:app --reload",
+    
+    "comment:backend:win": "↓ Windows(cmd.exe)用のバックエンド起動コマンド ↓",
+    "dev:backend:win": "cd backend && .venv\\Scripts\\activate.bat && uvicorn app.main:app --reload",
+
+    "comment:frontend": "↓ フロントエンド起動コマンド（共通） ↓",
+    "dev:frontend": "cd frontend && npm run dev",
+
+    "comment:dev": "↓ 実行用コマンド（OS別に使い分ける） ↓",
+    "dev:unix": "concurrently \"npm:dev:backend:unix\" \"npm:dev:frontend\"",
+    "dev:win": "concurrently \"npm:dev:backend:win\" \"npm:dev:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2" 
+  }
+}
