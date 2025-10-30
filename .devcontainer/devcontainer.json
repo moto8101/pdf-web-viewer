@@ -1,0 +1,33 @@
+// .devcontainer/devcontainer.json
+
+{
+  "name": "My Dev Environment (Node + uv)",
+  // ベースイメージ (Python 3.11がプリインストールされたイメージの例)
+  // uvはPythonプロジェクトでよく使われるため
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+
+  "features": {
+    // 1. npm (Node.js) をフィーチャーとして追加
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+
+  // 2. uv をインストール
+  "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh",
+
+  // (オプション) VS Code拡張機能の追加
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",       // Python
+        "ms-python.vscode-pylance", // Python (Pylance)
+        "dbaeumer.vscode-eslint",   // ESLint (Node.js用)
+        "astral-sh.uv"            // uv (公式拡張)
+      ]
+    }
+  },
+
+  // (オプション) コマンド実行時のユーザーを 'vscode' (非root) にする
+  "remoteUser": "vscode"
+}
